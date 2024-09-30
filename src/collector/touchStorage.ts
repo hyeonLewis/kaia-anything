@@ -1,12 +1,10 @@
 import { ethers } from "hardhat";
-import * as hardhat from "hardhat";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
 import fs from "fs";
 
-const hre = hardhat as HardhatRuntimeEnvironment;
+const path = "src/data/storageKeys/";
 
 async function getStorageKeys(txHash: string) {
-    const traces = await hre.network.provider.send("debug_traceTransaction", [txHash, { loggerTimeout: "60s" }]);
+    const traces = await ethers.provider.send("debug_traceTransaction", [txHash, { loggerTimeout: "60s" }]);
     const storageKeys: string[] = [];
     const traceSteps = traces.structLogs as { op: string; stack: string[] }[];
     for (const trace of traceSteps) {
@@ -72,9 +70,8 @@ async function main() {
             {}
         );
     }
-    const path = "src/data/storageKeys/storageKeys.json";
 
-    fs.writeFileSync(path, JSON.stringify(storageKeys, null, 2));
+    fs.writeFileSync(path + "storageKeys.json", JSON.stringify(storageKeys, null, 2));
 }
 
 main().catch((error) => {

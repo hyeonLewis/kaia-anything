@@ -42,7 +42,7 @@ async function main() {
         return result;
     };
 
-    const BATCH_SIZE = 10; // Adjust this value based on your network and system capabilities
+    const BATCH_SIZE = 10; // Adjust this value based on capabilities
     const results = [];
 
     for (let i = start; i < startBlock; i += BATCH_SIZE) {

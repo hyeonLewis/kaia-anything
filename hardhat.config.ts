@@ -68,6 +68,9 @@ const config: HardhatUserConfig = {
         sources: "./src/",
         deployments: "deployments",
     },
+    mocha: {
+        timeout: 10000000000,
+    },
 };
 
 export default config;
